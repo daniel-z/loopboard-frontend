@@ -10,7 +10,7 @@ angular.module('loopboardFrontApp', [
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, LoopBackResourceProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/home');
 
     $locationProvider.html5Mode(true);
 

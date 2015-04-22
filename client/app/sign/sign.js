@@ -8,6 +8,10 @@ angular.module('loopboardFrontApp')
         templateUrl: 'app/sign/views/signin.html',
         controller: 'SignCtrl'
       })
+      .state('logout', {
+        templateUrl: 'app/sign/views/signin.html',
+        controller: 'SignCtrl'
+      })
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/sign/views/signup.html',

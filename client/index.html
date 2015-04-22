@@ -23,7 +23,7 @@
     <!-- endbuild -->
   </head>
   <body ng-app="loopboardFrontApp">
-    <button class="btn btn-warning">Logout</button>
+    <button class="btn btn-warning" ui-sref="logout">Logout</button>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -65,10 +65,16 @@
         <script src="app/app.js"></script>
 
           <!-- injector:js -->
-          <script src="app/main/main.controller.js"></script>
+          <script src="app/home/controller/home.controller.js"></script>
+          <script src="app/home/home.js"></script>
+          <script src="app/main/controller/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/projects/controllers/projects.controller.js"></script>
+          <script src="app/projects/projects.js"></script>
           <script src="app/sign/controllers/sign.controller.js"></script>
           <script src="app/sign/sign.js"></script>
+          <script src="app/template/controller/template.controller.js"></script>
+          <script src="app/template/template.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

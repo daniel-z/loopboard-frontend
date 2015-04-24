@@ -6,7 +6,8 @@ angular.module('loopboardFrontApp', [
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
-    'lbServices'
+    'lbServices',
+    'ui.select'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, LoopBackResourceProvider) {
     $urlRouterProvider

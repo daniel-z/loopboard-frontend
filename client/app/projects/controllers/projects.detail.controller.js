@@ -4,13 +4,16 @@ angular.module('loopboardFrontApp')
   .controller('ProjectDetailCtrl', function (
     $scope,
     $stateParams,
+    $modal,
     Account,
-    Project
+    Project,
+    Category
   ) {
 
     $scope.project = [];
     $scope.category = {};
     $scope.categories = {};
+    $scope.cards = [];
 
     $scope.getProjects = function (logged) {
       Account.projects({
@@ -28,10 +31,17 @@ angular.module('loopboardFrontApp')
     $scope.getCategories = function getCategories() {
       Project.categories({
         id: $stateParams.id,
+        filter: {
+          include: {
+            cards: {
+              status
+            }
+          }
+        }
       }, function success(categories) {
         $scope.categories = categories;
         $scope.category = {};
-        console.log(categories);
+
       }, function error(error) {
         console.log('error', error);
       });
@@ -52,4 +62,45 @@ angular.module('loopboardFrontApp')
         $scope.getCategories();
       }
     });
+
+    $scope.createCard = function (category) {
+      var modalInstance = $modal.open({
+        templateUrl: 'app/projects/views/create.card.modal.html',
+        controller: 'CreateCardController',
+        resolve: {
+          category: function () {
+            return category
+          },
+          card: function () {
+            return {};
+          }
+        }
+      });
+
+      modalInstance.result.then(function (card) {
+        console.log(card);
+      }, function () {});
+      modalInstance.result.then($scope.getCategories());
+    };
+
+    $scope.editCard = function (card) {
+      console.log('card', card);
+      var modalInstance = $modal.open({
+        templateUrl: 'app/projects/views/create.card.modal.html',
+        controller: 'CreateCardController',
+        resolve: {
+          category: function () {
+            return null;
+          },
+          card: function () {
+            return card;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (card) {
+        console.log(card);
+      }, function () {});
+      modalInstance.result.then($scope.getCategories());
+    };
   });

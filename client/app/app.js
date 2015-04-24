@@ -15,16 +15,24 @@ angular.module('loopboardFrontApp', [
     $locationProvider.html5Mode(true);
 
     LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
-  }).run(function ($rootScope, Account) {
-    // user logged?
-    if (Account.isAuthenticated()) {
-      Account.getCurrent(function getAccount(account) {
-        $rootScope.logged = account;
-        console.log('account:', account);
-      });
-    } else {
-      $rootScope.logged = false;
-      console.log('NO user logged!');
-    }
+  }).run(function ($rootScope, Account, $location) {
+    /**
+     * Added moment to $rootScope
+     */
+    $rootScope.moment = moment;
+    /**
+     * Verify if user is logged
+     */
+    $rootScope.$on('$stateChangeStart', function stateChanged() {
+      if (Account.isAuthenticated()) {
+        Account.getCurrent(function getAccount(account) {
+          $rootScope.logged = account;
+        });
+      } else {
+        if ($location.path() != '/signin' && $location.path() != '/signup' && $location.path() != '/signout')
+          $location.path("/signin");
+        $rootScope.logged = false;
+      }
+    })
 
   });

@@ -16,6 +16,14 @@ angular.module('loopboardFrontApp')
         url: '/signup',
         templateUrl: 'app/sign/views/signup.html',
         controller: 'SignCtrl'
+      })
+      .state('signout', {
+        templateUrl: 'app/sign/views/signup.html',
+        controller: function signOut(Account, $state, $location) {
+          Account.logout(function () {
+            $state.go('signin');
+          });
+        }
       });
 
   });
